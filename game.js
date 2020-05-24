@@ -10,33 +10,19 @@
  let questionCounter=0;
  let avaiableQuestions=[];
 
- let questions = [
-     {
-         question: "Quanto é 5x3",
-         choice1: "10",
-         choice2: "18",
-         choice3:"25",
-         choice4:"15",
-         answer: 4
-     },
-
-    {
-        question: "Quanto é 80/5",
-        choice1: "15",
-        choice2: "22",
-        choice3: "16",
-        choice4: "12",
-        answer: 3
-    },
-    {
-        question: "Quem foi o Campeão brasileiro de 2019",
-        choice1: "Cruzeiro",
-        choice2: "Palmeiras",
-        choice3: "Flamengo",
-        choice4: "Grêmio",
-        answer: 3
-    }
- ]
+ let questions = [];
+ 
+ fetch("questions.json").then(res => {
+     console.log(res);
+     return res.json();
+ }).then(loadedQuestions =>{
+     console.log(loadedQuestions);
+     questions = loadedQuestions;
+     startGame();
+ })
+ .catch( err =>{
+console.error(err);
+ });
 
  //Constantes
 
@@ -101,4 +87,4 @@ incrementScore = num =>{
     score+=num;
     scoreText.innerText=score;
 }
- startGame();
+ 
